@@ -8,7 +8,7 @@ This repository turns the supplied MATLAB draft into small, reviewable modules f
 2. Agree on the coordinate origin and units (meters), then fill the campus and base-station data in `src/data/campusData.m`.
 3. Run `src/main.m` from MATLAB after the campus data and link evaluation have been completed.
 
-The starter modules make the shared interfaces explicit. The campus data is intentionally left blank, and `evaluateCampus.m` stops with a clear message until the team agrees on LOS/NLOS and O2I handling. They do not claim a validated Sejong result while the Sejong geometry, surveyed base stations, and propagation inputs are still missing.
+The starter modules make the shared interfaces explicit. The campus data is intentionally left blank, so enter surveyed Sejong geometry before running. The current evaluator uses building rectangles for a simple LOS/NLOS decision and a single shared O2I loss; state these assumptions in the presentation and refine only if time allows. It does not yet include shadow fading or vertical antenna patterns.
 
 ## Required comparisons
 
