@@ -1,21 +1,20 @@
 function results = evaluateCampus(userXY, campus, cfg)
-%EVALUATECAMPUS Orchestrates link evaluation for all user locations.
-% Each site row is [x_m y_m azimuth_deg]. Three sectors are created at
-% azimuth offsets 0, 120, and 240 degrees. Site and sector power assumptions
-% are shared through cfg.
+%EVALUATECAMPUS 모든 사용자 위치에서 기지국 링크를 계산합니다.
+% 각 사이트 행은 [x_m y_m 방위각_deg]입니다. 사이트마다 기준 방위각에서
+% 0, 120, 240도 떨어진 3개 섹터를 만들며 전력 설정은 cfg에서 공유합니다.
 
 if size(userXY, 2) ~= 2
-    error('userXY must be an N-by-2 array of [x y] locations in meters.');
+    error('userXY는 미터 단위 [x y] 위치를 담은 N×2 배열이어야 합니다.');
 end
 if ~isstruct(campus) || ~isstruct(cfg)
-    error('campus and cfg must be structs from campusData and projectConfig.');
+    error('campus와 cfg는 campusData, projectConfig가 반환한 구조체여야 합니다.');
 end
 if isempty(campus.serviceSites)
-    error('Add surveyed service sites to src/data/campusData.m first.');
+    error('먼저 src/data/campusData.m에 조사한 서비스 기지국 좌표를 입력하세요.');
 end
 isIndoor = isInsideBuilding(userXY, campus.buildings);
 if any(isnan(cfg.o2iLossDb)) && any(isIndoor)
-    error('Set cfg.o2iLossDb after the team agrees on its indoor-loss assumption.');
+    error('팀에서 실내 손실 가정을 정한 뒤 cfg.o2iLossDb를 설정하세요.');
 end
 
 noiseDbm = calcNoisePower(cfg.bandwidthHz, cfg.noiseFigureDb);
@@ -40,7 +39,7 @@ results.noiseDbm = noiseDbm;
 end
 
 function rxDbm = siteSectorPowers(userXY, sites, campus, cfg, userIsIndoor)
-% Calculate received power from every sector at every site.
+% 모든 사이트의 각 섹터에서 수신되는 전력을 계산합니다.
 rxDbm = zeros(0, 1);
 sectorOffsetsDeg = [0, 120, 240];
 for siteIndex = 1:size(sites, 1)
@@ -68,7 +67,7 @@ end
 end
 
 function indoor = isInsideBuilding(userXY, buildings)
-% Buildings use [xmin xmax ymin ymax] rectangles in meters.
+% 건물은 미터 단위 [xmin xmax ymin ymax] 사각형으로 표현합니다.
 indoor = false(size(userXY, 1), 1);
 for k = 1:size(buildings, 1)
     b = buildings(k, :);

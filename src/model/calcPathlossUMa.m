@@ -1,7 +1,7 @@
 function pathlossDb = calcPathlossUMa(d2dM, d3dM, fcGHz, hBsM, hUeM, isLos)
-%CALCPATHLOSSUMA 3GPP TR 38.901 UMa LOS/NLOS large-scale path loss.
-% Inputs: distances in m, frequency in GHz, antenna heights in m, LOS flag.
-% This function covers path loss only; shadow fading and O2I loss are separate.
+%CALCPATHLOSSUMA 3GPP TR 38.901 UMa LOS/NLOS 대규모 경로손실입니다.
+% 입력 단위: 거리 m, 주파수 GHz, 안테나 높이 m, LOS 여부.
+% 이 함수는 경로손실만 계산합니다. Shadow fading과 O2I 손실은 별도입니다.
 
 validateattributes(d2dM, {'numeric'}, {'scalar', 'positive', 'finite'});
 validateattributes(d3dM, {'numeric'}, {'scalar', 'positive', 'finite'});

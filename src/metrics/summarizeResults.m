@@ -1,12 +1,12 @@
 function summary = summarizeResults(rateBps)
-%SUMMARIZERESULTS Summarize per-location rates in bit/s.
+%SUMMARIZERESULTS 위치별 전송률(bit/s)의 평균·중앙값·하위 5%를 요약합니다.
 
 validateattributes(rateBps, {'numeric'}, {'vector', 'nonempty', 'nonnegative', 'finite'});
 summary.meanBps = mean(rateBps);
 summary.medianBps = median(rateBps);
 summary.sortedRateBps = sort(rateBps(:));
 
-% Linear interpolation at the 5th percentile, without a toolbox dependency.
+% 추가 툴박스에 의존하지 않도록 선형 보간으로 하위 5%를 계산합니다.
 n = numel(summary.sortedRateBps);
 h = 1 + (n - 1) * 0.05;
 lo = floor(h);

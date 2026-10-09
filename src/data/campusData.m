@@ -1,23 +1,23 @@
 function campus = campusData()
-%CAMPUSDATA Sejong campus geometry and surveyed base-station coordinates.
-% Replace the empty fields using one meter-based coordinate system. Do not
-% copy the Soonchunhyang coordinates from legacy/Campus_original.m.
+CAMPUSDATA 세종대 캠퍼스 건물과 조사한 기지국 좌표를 담습니다.
+% 빈 항목은 미터 단위의 공통 좌표계로 채웁니다. legacy/Campus_original.m의
+% 순천향대 좌표를 복사해 사용하지 마세요.
 
-campus.coordinateOrigin = "TODO: describe map origin and axis directions";
-campus.coordinateSource = "TODO: map / survey source and access date";
+campus.coordinateOrigin = "TODO: 지도 원점과 x/y축 방향을 적으세요";
+campus.coordinateSource = "TODO: 지도·조사 출처와 조사 날짜를 적으세요";
 
-% Each row is [xmin xmax ymin ymax], in meters.
+% 각 행은 [xmin xmax ymin ymax]이며 단위는 m입니다.
 campus.evalRegions = zeros(0, 4);
 campus.buildings = zeros(0, 4);
 
-% Each row is [x_m y_m azimuth_deg]. Use one row per site; sector azimuth
-% convention and height are supplied through projectConfig / model setup.
+% 각 행은 [x_m y_m 방위각_deg]이며 기지국 사이트마다 한 행을 둡니다.
+% 섹터 방위각 규칙과 높이는 projectConfig 및 모델 설정에서 지정합니다.
 campus.serviceSites = zeros(0, 3);
 campus.interferenceSites = zeros(0, 3);
 campus.proposedSites = zeros(0, 3);
 
 if isempty(campus.evalRegions) || isempty(campus.serviceSites)
-    error(['Complete src/data/campusData.m with Sejong evaluation regions ' ...
-        'and service-site coordinates before running a simulation.']);
+    error(['시뮬레이션 전에 src/data/campusData.m에 세종대 평가 영역과 ' ...
+        '서비스 기지국 좌표를 입력하세요.']);
 end
 end

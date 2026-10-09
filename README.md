@@ -1,27 +1,28 @@
-# Sejong 5G SLS mini project
+# 세종대 5G 시스템 수준 시뮬레이터 미니 프로젝트
 
-This repository turns the supplied MATLAB draft into small, reviewable modules for the Sejong campus study. The supplied draft is kept unchanged under `legacy/` as a reference; it still contains Soonchunhyang campus geometry and must not be treated as a Sejong result.
+제공된 MATLAB 초안을 세종대 캠퍼스 분석에 맞게 모듈별로 정리한 저장소입니다. 원본 코드는 `legacy/`에 참고용으로 보존했습니다. 기존 코드는 순천향대 좌표와 건물 정보를 포함하므로 세종대 결과로 사용하지 마세요.
 
-## Start here
+## 먼저 읽을 파일
 
-1. Read `docs/MATLAB_MODULE_MAP.md` for the simulation flow and each file's responsibility.
-2. Agree on the coordinate origin and units (meters), then fill the campus and base-station data in `src/data/campusData.m`.
-3. Run `src/main.m` from MATLAB after the campus data and link evaluation have been completed.
+1. `docs/MATLAB_MODULE_MAP.md`에서 시뮬레이션 흐름과 모듈별 역할을 확인합니다.
+2. 좌표 원점과 단위를 미터로 합의한 뒤 `src/data/campusData.m`에 세종대 건물과 기지국 데이터를 입력합니다.
+3. 실내 손실 가정을 정하고 `src/config/projectConfig.m`의 `cfg.o2iLossDb`를 설정합니다.
+4. MATLAB에서 `src/main.m`을 실행합니다.
 
-The starter modules make the shared interfaces explicit. The campus data is intentionally left blank, so enter surveyed Sejong geometry before running. The current evaluator uses building rectangles for a simple LOS/NLOS decision and a single shared O2I loss; state these assumptions in the presentation and refine only if time allows. It does not yet include shadow fading or vertical antenna patterns.
+세종대 좌표와 기지국 위치가 입력되기 전에는 실제 시뮬레이션 결과가 만들어지지 않습니다. 현재 LOS/NLOS는 건물 사각형으로 판정하고, 실내 손실은 하나의 공통값을 사용합니다. 그림과 발표에서 이 가정을 밝혀야 합니다. Shadow fading과 수직 안테나 패턴은 아직 구현하지 않았습니다.
 
-## Required comparisons
+## 필수 비교 실험
 
-- Frequency: 3.5 GHz / 100 MHz against 28 GHz / 100 MHz.
-- Bandwidth: 3.5 GHz / 100 MHz against 28 GHz / 800 MHz.
-- New sites: retain existing sites, add two candidates, and compare before/after using the same map, power, antenna, and random inputs.
+- 주파수 비교: 3.5 GHz / 100 MHz와 28 GHz / 100 MHz
+- 대역폭 비교: 3.5 GHz / 100 MHz와 28 GHz / 800 MHz
+- 신규 기지국: 기존 기지국을 유지하고 두 위치를 추가한 뒤, 같은 조건으로 추가 전후를 비교
 
-Report SINR maps and throughput CDFs, including the median and 5th percentile. Keep units and assumptions visible in the figures.
+SINR 지도와 전송률 CDF를 만들고 중앙값과 하위 5%를 함께 비교합니다. 그림에는 단위와 가정을 표시합니다.
 
-## Team workflow
+## 팀 협업
 
-Use one short-lived branch per change (`data/…`, `model/…`, `experiment/…`, `plot/…`), open a pull request to `main`, and have another teammate review it. Keep shared assumptions in `projectConfig.m`; do not copy parameter values into individual modules. See `CONTRIBUTING.md`.
+작업마다 짧은 브랜치를 만들고 `main`으로 PR을 올려 다른 팀원 한 명의 검토를 받습니다. 실험 파라미터는 `projectConfig.m` 한 곳에서 관리합니다. 네 명의 역할과 작업 규칙은 `CONTRIBUTING.md`를 참고하세요.
 
-## MATLAB
+## MATLAB 실행
 
-Open this folder in MATLAB and run `src/main.m`. The numerical functions use MATLAB base functionality; no Communications Toolbox function is required by the starter modules.
+저장소 폴더를 MATLAB에서 열고 `src/main.m`을 실행합니다. 현재 계산 모듈은 MATLAB 기본 기능을 사용하며 Communications Toolbox가 필요하지 않습니다.

@@ -1,6 +1,6 @@
 function blocked = isBlockedByBuildings(siteXY, userXY, buildings)
-%ISBLOCKEDBYBUILDINGS Approximate LOS using samples along the map link.
-% Buildings are [xmin xmax ymin ymax] rectangles in meters.
+%ISBLOCKEDBYBUILDINGS 링크를 따라 표본을 찍어 LOS를 근사 판정합니다.
+% 건물 좌표는 [xmin xmax ymin ymax] 사각형이며 단위는 m입니다.
 
 blocked = false;
 if isempty(buildings)

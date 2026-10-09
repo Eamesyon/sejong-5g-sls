@@ -1,22 +1,22 @@
-# Collaboration guide
+# 팀 협업 안내
 
-## Four-person split
+## 네 명의 역할 분담
 
-1. **Campus data:** coordinate origin, evaluation regions, building rectangles, existing and nearby sites, and source/date notes.
-2. **Propagation:** path loss, LOS/NLOS assignment, indoor loss assumptions, and sector orientation.
-3. **Metrics and experiments:** SINR, rate, controlled scenario matrix, median and 5th-percentile comparisons.
-4. **Integration and presentation:** keep `main.m` runnable, review pull requests, generate maps/CDFs, and prepare the explanation.
+1. **캠퍼스 데이터:** 좌표 원점, 평가 영역, 건물 사각형, 기존·주변 기지국 위치와 출처·조사일을 정리합니다.
+2. **전파 모델:** 경로손실, LOS/NLOS 판정, 실내 손실 가정, 섹터 방향을 맡습니다.
+3. **지표와 실험:** SINR, 전송률, 통제 실험 조건, 중앙값·하위 5% 비교를 맡습니다.
+4. **통합과 발표:** `main.m` 실행 흐름을 관리하고, PR을 검토하며, 지도·CDF와 발표를 정리합니다.
 
-Agree on function inputs/outputs before parallel edits. The shared data schema is described in `docs/MATLAB_MODULE_MAP.md`.
+병렬 작업 전에 함수 입력과 출력부터 합의합니다. 공통 데이터 형식은 `docs/MATLAB_MODULE_MAP.md`에 있습니다.
 
-## Branch and pull-request rules
+## 브랜치와 PR 규칙
 
-- Start from an updated `main` branch.
-- Name branches `data/<topic>`, `model/<topic>`, `experiment/<topic>`, or `plot/<topic>`.
-- Keep a pull request focused on one module or one experiment.
-- Include the assumptions changed, units, and a screenshot or output summary when changing results.
-- Ask one teammate to review before merging. Do not commit generated figures or temporary MATLAB files.
+- 최신 `main`에서 작업을 시작합니다.
+- 브랜치 이름은 `data/<주제>`, `model/<주제>`, `experiment/<주제>`, `plot/<주제>` 형식으로 만듭니다.
+- PR 하나에는 한 모듈 또는 한 실험만 담습니다.
+- 결과를 바꾸는 수정은 사용한 가정·단위와 결과 요약 또는 그림을 PR에 적습니다.
+- 다른 팀원 한 명이 검토한 뒤 합칩니다. 임시 MATLAB 파일이나 생성한 그림은 커밋하지 않습니다.
 
-## Commit messages
+## 커밋 메시지
 
-Use a short verb phrase, for example `Add Sejong building coordinates` or `Fix thermal noise calculation`.
+짧은 동사형 문장을 사용합니다. 예: `세종대 건물 좌표 추가`, `열잡음 계산 수정`

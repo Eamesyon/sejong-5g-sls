@@ -1,6 +1,6 @@
-%% Sejong 5G SLS project entry point
-% Run this script from MATLAB. Keep the sequence short and move calculations
-% into functions so each module can be reviewed on its own.
+%% 세종대 5G 시스템 수준 시뮬레이터 실행 파일
+% MATLAB에서 이 파일을 실행합니다. 계산은 각 기능 파일에 두어 모듈별로
+% 읽고 검토할 수 있게 합니다.
 
 clear; clc; close all;
 
@@ -11,9 +11,6 @@ cfg = projectConfig();
 campus = campusData();
 userXY = buildUserGrid(campus, cfg.gridSpacingM);
 
-% TODO: Connect the campus links to calcPathlossUMa, calcSinr, and calcRate.
-% This step needs surveyed Sejong sites plus the team's agreed LOS/NLOS and
-% O2I assumptions. It intentionally errors until those inputs are available.
 results = evaluateCampus(userXY, campus, cfg);
 
 summary = summarizeResults(results.rateBps);
