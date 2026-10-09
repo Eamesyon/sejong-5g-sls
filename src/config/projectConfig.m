@@ -5,11 +5,12 @@ function cfg = projectConfig()
 cfg.gridSpacingM = 5;
 cfg.frequencyGHz = 3.5;
 cfg.bandwidthHz = 100e6;
+cfg.activeComparison = 'frequency'; % 'frequency' 또는 'bandwidth'
 cfg.txPowerDbmPerSector = 43;
 cfg.noiseFigureDb = 7;
 cfg.bsHeightM = 25;
 cfg.ueHeightM = 1.5;
-cfg.o2iLossDb = NaN; % Set this after agreeing on the building/material model.
+cfg.o2iLossDb = NaN; % 실내 손실 모델을 합의한 뒤 값을 정합니다.
 cfg.sectorBeamwidthDeg = 65;
 cfg.sectorMaxAttenuationDb = 30;
 
@@ -22,3 +23,4 @@ cfg.experiments.bandwidth = [3.5, 100e6; 28, 800e6]; % [GHz, Hz]
 % 비교 조건마다 같은 시드와 위치별 난수 실현값을 사용합니다.
 cfg.randomSeed = 2026;
 end
+

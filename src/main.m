@@ -11,8 +11,19 @@ cfg = projectConfig();
 campus = campusData();
 userXY = buildUserGrid(campus, cfg.gridSpacingM);
 
-results = evaluateCampus(userXY, campus, cfg);
+if ~isfield(cfg.experiments, cfg.activeComparison)
+    error('cfg.activeComparison은 frequency 또는 bandwidth여야 합니다.');
+end
+conditions = cfg.experiments.(cfg.activeComparison);
+comparison = runComparison(userXY, campus, cfg, conditions);
+fprintf('선택한 비교: %s\n', cfg.activeComparison);
 
-summary = summarizeResults(results.rateBps);
-disp(summary);
-plotResults(userXY, results.sinrDb, summary, campus);
+for k = 1:numel(comparison)
+    fprintf('\n조건 %d: %.1f GHz / %.0f MHz\n', k, ...
+        comparison(k).frequencyGHz, comparison(k).bandwidthHz / 1e6);
+    fprintf('중앙값 %.2f Mbit/s, 하위 5%% %.2f Mbit/s\n', ...
+        comparison(k).summary.medianBps / 1e6, ...
+        comparison(k).summary.p5Bps / 1e6);
+end
+plotComparison(userXY, comparison, campus);
+

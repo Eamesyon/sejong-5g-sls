@@ -1,5 +1,5 @@
 function campus = campusData()
-CAMPUSDATA 세종대 캠퍼스 건물과 조사한 기지국 좌표를 담습니다.
+%CAMPUSDATA 세종대 캠퍼스 건물과 조사한 기지국 좌표를 담습니다.
 % 빈 항목은 미터 단위의 공통 좌표계로 채웁니다. legacy/Campus_original.m의
 % 순천향대 좌표를 복사해 사용하지 마세요.
 
@@ -21,3 +21,4 @@ if isempty(campus.evalRegions) || isempty(campus.serviceSites)
         '서비스 기지국 좌표를 입력하세요.']);
 end
 end
+

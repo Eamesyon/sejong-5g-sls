@@ -20,6 +20,8 @@
 | `src/metrics/calcRate.m` | Shannon 전송률 근사 계산 | 대역폭(Hz), 선형 SINR | 전송률(bit/s) |
 | `src/metrics/summarizeResults.m` | 평균·중앙값·하위 5%와 CDF 표본 계산 | 위치별 전송률(bit/s) | 요약 구조체 |
 | `src/plots/plotResults.m` | SINR 지도와 전송률 CDF 표시 | 위치·SINR·요약·캠퍼스 데이터 | 그림 |
+| `src/plots/plotComparison.m` | 같은 색 범위의 SINR 지도와 겹친 CDF 표시 | 비교 결과 배열, 캠퍼스 데이터 | 비교 그림 |
+| `src/experiments/runComparison.m` | 통제된 조건 쌍을 동일한 위치에서 순차 실행 | 위치·캠퍼스·설정·조건 행렬 | 조건별 결과 및 요약 |
 | `src/experiments/evaluateCampus.m` | 모든 사용자 위치와 기지국 섹터의 링크 계산 | 사용자 위치, `campus`, `cfg` | 위치별 SINR·전송률 |
 
 ## 공통 단위와 꼭 알아야 할 개념
@@ -42,3 +44,4 @@
 ## 결과를 만들기 전에 채울 데이터
 
 `src/data/campusData.m`에 미터 기준 좌표계, 평가 영역, 건물 사각형, 서비스 기지국과 주변 동일 대역 간섭 기지국을 입력합니다. 자료 출처와 조사일도 기록합니다. `cfg.o2iLossDb`에는 팀이 선택한 실내 손실 가정을 입력합니다. 현재 LOS/NLOS 판정은 건물 사각형을 이용한 근사이고, 실내 손실은 하나의 공통값입니다. 발표에서 이 단순화를 밝혀야 합니다. Shadow fading과 수직 안테나 패턴은 아직 구현하지 않았습니다.
+

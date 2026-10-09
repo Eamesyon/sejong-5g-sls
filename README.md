@@ -9,6 +9,21 @@
 3. 실내 손실 가정을 정하고 `src/config/projectConfig.m`의 `cfg.o2iLossDb`를 설정합니다.
 4. MATLAB에서 `src/main.m`을 실행합니다.
 
+## 처음 실행하기 전에 팀이 입력할 것
+
+`src/data/campusData.m`에서 아래 항목을 실제 조사 자료로 채웁니다.
+
+- `coordinateOrigin`: 지도 원점과 x/y축 방향
+- `coordinateSource`: 지도·기지국 자료 출처와 조사 날짜
+- `evalRegions`: 평가할 캠퍼스 영역의 `[xmin xmax ymin ymax]` 사각형 행렬(m)
+- `buildings`: 건물의 `[xmin xmax ymin ymax]` 사각형 행렬(m)
+- `serviceSites`, `interferenceSites`: 사이트마다 `[x_m y_m 기준방위각_deg]` 한 행
+- `src/config/projectConfig.m`의 `cfg.o2iLossDb`: 팀에서 정한 실외-실내 손실(dB)
+
+처음에는 `cfg.activeComparison = 'frequency'`로 실행해 3.5/28 GHz, 두 조건 모두 100 MHz인 쌍을 확인합니다. 대역폭 실험은 `bandwidth`로 바꿉니다. 실행할 때마다 두 조건이 같은 평가 위치를 사용합니다. 새 기지국 두 곳의 좌표는 별도 배치 비교 단계에서 추가합니다.
+
+좌표는 모두 같은 원점·방향·미터 단위를 사용해야 합니다. 건물 사각형은 현재 격자에서 실내 여부와 링크 차폐를 근사하는 데 쓰므로, 지도와 겹쳐 보며 경계를 확인합니다.
+
 세종대 좌표와 기지국 위치가 입력되기 전에는 실제 시뮬레이션 결과가 만들어지지 않습니다. 현재 LOS/NLOS는 건물 사각형으로 판정하고, 실내 손실은 하나의 공통값을 사용합니다. 그림과 발표에서 이 가정을 밝혀야 합니다. Shadow fading과 수직 안테나 패턴은 아직 구현하지 않았습니다.
 
 ## 필수 비교 실험
@@ -26,3 +41,4 @@ SINR 지도와 전송률 CDF를 만들고 중앙값과 하위 5%를 함께 비�
 ## MATLAB 실행
 
 저장소 폴더를 MATLAB에서 열고 `src/main.m`을 실행합니다. 현재 계산 모듈은 MATLAB 기본 기능을 사용하며 Communications Toolbox가 필요하지 않습니다.
+
